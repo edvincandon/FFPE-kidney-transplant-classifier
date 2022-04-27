@@ -22,9 +22,9 @@ class Classifier:
                           'CCL18': {'type': 'number'},
                           'CAV1': {'type': 'number'},
                           'PECAM': {'type': 'number'},
-                          'PRF': {'type': 'number'},
-                          'ADAMdec': {'type': 'number'},
-                          'IFNg': {'type': 'number'},
+                          'PRF1': {'type': 'number'},
+                          'ADAMDEC1': {'type': 'number'},
+                          'IFNG': {'type': 'number'},
                       },
                       'required': ['CARD16',
                                    'CD72',
@@ -40,9 +40,9 @@ class Classifier:
                                    'CCL18',
                                    'CAV1',
                                    'PECAM',
-                                   'PRF',
-                                   'ADAMdec',
-                                   'IFNg']
+                                   'PRF1',
+                                   'ADAMDEC1',
+                                   'IFNG']
                       },
             'dsa': {'type': 'number', 'optional': True}
         },
