@@ -12,6 +12,7 @@ export const GeneInput: React.FC<{
         name={label}
         min="0"
         step="0.01"
+        defaultValue={0}
         required
       />
     </>
