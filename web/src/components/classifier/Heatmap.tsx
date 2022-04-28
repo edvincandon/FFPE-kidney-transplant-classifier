@@ -19,28 +19,36 @@ const CMAP = generateHeatMap(
 
 export const Heatmap: React.FC<{ inputs: GeneState }> = ({ inputs }) => {
   return (
-    <>
-      <div className="grid" style={{ fontSize: "0.42em" }}>
+    <figure>
+      <div
+        style={{
+          fontSize: "0.42em",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <span style={{ marginBottom: 4, display: "block" }}>
-          Low expression
+          Low expression<sup>*</sup>
         </span>
         <span style={{ marginBottom: 4, display: "block", textAlign: "right" }}>
-          High expression
+          High expression<sup>*</sup>
         </span>
       </div>
 
-      <div className="grid" style={{ gridGap: 0 }}>
+      <div style={{ display: "flex", height: 15 }}>
         {CMAP.map((rgb, i) => (
           <div
             key={i}
             style={{
+              display: "block",
+              flexGrow: 1,
               backgroundColor: `rgb(${rgb.join(", ")})`,
               height: 15,
             }}
           ></div>
         ))}
       </div>
-      <div className="grid" style={{ gridGap: 0 }}>
+      <div style={{ display: "flex", height: 45 }}>
         {GENES.filter((gene) => gene !== "DSA").map((gene, i) => {
           const value = parseFloat(
             (inputs[gene]?.trim() !== "" ? inputs[gene] : null) ?? "0"
@@ -56,7 +64,15 @@ export const Heatmap: React.FC<{ inputs: GeneState }> = ({ inputs }) => {
             : Math.round(CMAP.length / 2);
 
           return (
-            <div key={gene} style={{ textAlign: "center", fontSize: "0.42em" }}>
+            <div
+              key={gene}
+              style={{
+                textAlign: "center",
+                fontSize: "0.42em",
+                display: "block",
+                flexGrow: 1,
+              }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -72,6 +88,15 @@ export const Heatmap: React.FC<{ inputs: GeneState }> = ({ inputs }) => {
           );
         })}
       </div>
-    </>
+      <div className="grid">
+        <div style={{ marginTop: 5, opacity: 0.5 }}>
+          <p style={{ fontSize: "0.5em" }}>
+            * expressed values for each gene are normalized (unit variance and 0
+            mean) against our initial dataset when vizualising the heatmap or
+            running the classifier
+          </p>
+        </div>
+      </div>
+    </figure>
   );
 };

@@ -6,3 +6,6 @@ export function* chunks<T extends any = any>(
     yield arr.slice(i, i + n);
   }
 }
+
+export const toPercentage = (val: number): string =>
+  `${Math.round(val * 10000) / 100}%`;
