@@ -33152,7 +33152,7 @@ function chunks(arr, n) {
     }
   });
 }
-},{}],"components/DSAInput.tsx":[function(require,module,exports) {
+},{}],"components/classifier/DSAInput.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33181,7 +33181,7 @@ var DSAInput = function DSAInput(_a) {
 };
 
 exports.DSAInput = DSAInput;
-},{"react":"../node_modules/react/index.js"}],"components/GeneInput.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/classifier/GeneInput.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33203,12 +33203,13 @@ var GeneInput = function GeneInput(_a) {
     name: label,
     min: "0",
     step: "0.01",
+    defaultValue: 0,
     required: true
   }));
 };
 
 exports.GeneInput = GeneInput;
-},{"react":"../node_modules/react/index.js"}],"components/ClassifierInputs.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/classifier/ClassifierInputs.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33265,7 +33266,7 @@ var __spreadArray = void 0 && (void 0).__spreadArray || function (to, from, pack
   return to.concat(ar || Array.prototype.slice.call(from));
 };
 
-var GENES = ["DSA", "CARD16", "CD72", "CD68", "CCL4", "CTLA4", "PLA1A", "ROBO4", "KLRD1", "FCGR3", "GNLY", "CXCL11", "CCL18", "CAV1", "PECAM", "PRF", "ADAMdec", "IFNg"];
+var GENES = ["DSA", "CARD16", "CD72", "CD68", "CCL4", "CTLA4", "PLA1A", "ROBO4", "KLRD1", "FCGR3", "GNLY", "CXCL11", "CCL18", "CAV1", "PECAM", "PRF1", "ADAMDEC1", "IFNG"];
 
 var ClassifierInputs = function ClassifierInputs() {
   var genesGrid = (0, _react.useMemo)(function () {
@@ -33276,7 +33277,12 @@ var ClassifierInputs = function ClassifierInputs() {
       withDSA = _a[0],
       setWithDSA = _a[1];
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("article", null, _react.default.createElement("header", null, _react.default.createElement("h4", null, "Running the classifier"), _react.default.createElement("p", null, "Fill in the ", _react.default.createElement("strong", null, "normalized"), " gene expression values in the input fields below.", " ", _react.default.createElement("i", null, "You can disable the DSA input field if you do not have this specific piece of data. The predictions may differ when toggling this option as we have trained two models : one with DSA data and one without."), " "), _react.default.createElement("p", null, "Finally, click the ", _react.default.createElement("strong", null, "CLASSIFY"), " button run the classifier and wait for the prediction results."), _react.default.createElement("blockquote", null, "To obtain normalized values from an ", _react.default.createElement("strong", null, ".fsa file"), ",", " ", "please extract them using the RT-MLPA Analysis online application", " ", _react.default.createElement("i", null, "Provided by ", _react.default.createElement("strong", null, "INSERM U1245"), " - Genomics and Biomarkers of Lymphoma and Solid Tumors")), _react.default.createElement("a", {
+    href: " http://92.222.23.215/RTMLPA/index.php?p=signin",
+    role: "button",
+    className: "secondary outline",
+    target: "_blank"
+  }, "\u2192 RT-MLPA Analysis")), _react.default.createElement("label", {
     htmlFor: "withDSA"
   }, _react.default.createElement("input", {
     type: "checkbox",
@@ -33300,11 +33306,41 @@ var ClassifierInputs = function ClassifierInputs() {
         label: gene
       }));
     }));
-  }));
+  }), _react.default.createElement("footer", null, "TRAIN")));
 };
 
 exports.ClassifierInputs = ClassifierInputs;
-},{"react":"../node_modules/react/index.js","~/utils":"utils/index.ts","./DSAInput":"components/DSAInput.tsx","./GeneInput":"components/GeneInput.tsx"}],"components/Header.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","~/utils":"utils/index.ts","./DSAInput":"components/classifier/DSAInput.tsx","./GeneInput":"components/classifier/GeneInput.tsx"}],"components/layout/Footer.tsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Footer = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react.default.createElement("footer", null, _react.default.createElement("p", null, _react.default.createElement("h4", null, "Paper authorship"), _react.default.createElement("p", null, "Tristan de Nattes", _react.default.createElement("sup", null, "1,2,3"), ", Jack Beadle", _react.default.createElement("sup", null, "3"), ", Frederic Toulza", _react.default.createElement("sup", null, "3"), ", Edvin Candon", _react.default.createElement("sup", null, "1"), ", Philippe Ruminy", _react.default.createElement("sup", null, "4"), ", Arnaud Fran\xE7ois", _react.default.createElement("sup", null, "4"), ", Dominique Bertrand", _react.default.createElement("sup", null, "1"), ", Dominique Guerrot", _react.default.createElement("sup", null, "1"), ", Fanny Drieux", _react.default.createElement("sup", null, "4,5"), ", Candice Roufosse", _react.default.createElement("sup", null, "3"), ", Sophie Candon", _react.default.createElement("sup", null, "2")), _react.default.createElement("ol", {
+    style: {
+      fontSize: "0.8em"
+    }
+  }, _react.default.createElement("li", null, "Nephrology \u2013 Kidney Transplant Unit, Rouen University Hospital - Rouen \uD83C\uDDEB\uD83C\uDDF7"), _react.default.createElement("li", null, "Normandy University, INSERM U1234,\xA0Rouen University Hospital, Department of Immunology, and biotherapies - Rouen \uD83C\uDDEB\uD83C\uDDF7"), _react.default.createElement("li", null, "Department of Immunology and Inflammation, Centre for Inflammatory Diseases, Imperial College - London \uD83C\uDDEC\uD83C\uDDE7"), _react.default.createElement("li", null, "Normandy University, UNIROUEN, INSERM U1245, Centre Henri Becquerel - Rouen \uD83C\uDDEB\uD83C\uDDF7"), _react.default.createElement("li", null, "Pathology Department, Rouen University Hospital - Rouen \uD83C\uDDEB\uD83C\uDDF7"))), _react.default.createElement("p", null, _react.default.createElement("strong", null, "For research purposes only")), _react.default.createElement("p", {
+    style: {
+      fontSize: "0.8em"
+    }
+  }, "Contact", " ", _react.default.createElement("a", {
+    href: "mailto:tristan.de-nattes@chu-rouen.fr"
+  }, "\u2709\uFE0F Tristan de Nattes, M.D"), " ", _react.default.createElement("br", null), "Developed by", " ", _react.default.createElement("a", {
+    href: "https://lostsolution.io",
+    target: "_blank"
+  }, "\uD83E\uDDD1\u200D\uD83D\uDCBB Edvin CANDON"), " ", "\xA9 2022"));
+};
+
+exports.Footer = Footer;
+},{"react":"../node_modules/react/index.js"}],"components/layout/Header.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33333,18 +33369,20 @@ exports.App = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _ClassifierInputs = require("./components/ClassifierInputs");
+var _ClassifierInputs = require("./components/classifier/ClassifierInputs");
 
-var _Header = require("./components/Header");
+var _Footer = require("./components/layout/Footer");
+
+var _Header = require("./components/layout/Header");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.Header, null), _react.default.createElement(_ClassifierInputs.ClassifierInputs, null));
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.Header, null), _react.default.createElement(_ClassifierInputs.ClassifierInputs, null), _react.default.createElement(_Footer.Footer, null));
 };
 
 exports.App = App;
-},{"react":"../node_modules/react/index.js","./components/ClassifierInputs":"components/ClassifierInputs.tsx","./components/Header":"components/Header.tsx"}],"index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/classifier/ClassifierInputs":"components/classifier/ClassifierInputs.tsx","./components/layout/Footer":"components/layout/Footer.tsx","./components/layout/Header":"components/layout/Header.tsx"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -33385,7 +33423,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49192" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62053" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

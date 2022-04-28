@@ -3,7 +3,7 @@ import React from 'react';
 export const Footer: React.FC = () => (
   <footer>
     <p>
-      <h4>Authorship</h4>
+      <h4>Paper authorship</h4>
       <p>
         Tristan de Nattes<sup>1,2,3</sup>, Jack Beadle<sup>3</sup>, Frederic
         Toulza<sup>3</sup>, Edvin Candon<sup>1</sup>, Philippe Ruminy
@@ -35,9 +35,14 @@ export const Footer: React.FC = () => (
       <strong>For research purposes only</strong>
     </p>
     <p style={{ fontSize: "0.8em" }}>
+      Contact{" "}
+      <a href="mailto:tristan.de-nattes@chu-rouen.fr">
+        ✉️ Tristan de Nattes, M.D
+      </a>{" "}
+      <br />
       Developed by{" "}
       <a href="https://lostsolution.io" target="_blank">
-        Edvin CANDON
+        🧑‍💻 Edvin CANDON
       </a>{" "}
       © 2022
     </p>
