@@ -7,8 +7,8 @@
       "includeFiles": "{api/static/**/*, api/templates/**/*, api/_classifier.py, models/**/*}"
     }
   },
-  "routes": [
-    { "src": "/", "dest": "api/index.py" },
-    { "src": "/static/**", "dest": "api/index.py" }
+  "rewrites": [
+    { "source": "/", "destination": "/api" },
+    { "source": "/:match*", "destination": "/api" }
   ]
 }
