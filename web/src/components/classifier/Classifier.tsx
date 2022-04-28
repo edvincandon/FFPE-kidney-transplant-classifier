@@ -25,7 +25,7 @@ const GENES = [
   "IFNG",
 ];
 
-export const ClassifierInputs: React.FC = () => {
+export const Classifier: React.FC = () => {
   const genesGrid = useMemo(() => [...chunks(GENES, 6)], []);
   const [withDSA, setWithDSA] = useState<boolean>(true);
 
@@ -63,7 +63,11 @@ export const ClassifierInputs: React.FC = () => {
             className="secondary outline"
             target="_blank"
           >
-            → RT-MLPA Analysis
+            → RT-MLPA Analysis{" "}
+            <img
+              src="http://92.222.23.215/RTMLPA/site_media/logoA.png"
+              style={{ height: 16, marginLeft: 5 }}
+            />
           </a>
         </header>
         <label htmlFor="withDSA">

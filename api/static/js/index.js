@@ -33209,13 +33209,13 @@ var GeneInput = function GeneInput(_a) {
 };
 
 exports.GeneInput = GeneInput;
-},{"react":"../node_modules/react/index.js"}],"components/classifier/ClassifierInputs.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/classifier/Classifier.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ClassifierInputs = void 0;
+exports.Classifier = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -33268,7 +33268,7 @@ var __spreadArray = void 0 && (void 0).__spreadArray || function (to, from, pack
 
 var GENES = ["DSA", "CARD16", "CD72", "CD68", "CCL4", "CTLA4", "PLA1A", "ROBO4", "KLRD1", "FCGR3", "GNLY", "CXCL11", "CCL18", "CAV1", "PECAM", "PRF1", "ADAMDEC1", "IFNG"];
 
-var ClassifierInputs = function ClassifierInputs() {
+var Classifier = function Classifier() {
   var genesGrid = (0, _react.useMemo)(function () {
     return __spreadArray([], __read((0, _utils.chunks)(GENES, 6)), false);
   }, []);
@@ -33282,7 +33282,13 @@ var ClassifierInputs = function ClassifierInputs() {
     role: "button",
     className: "secondary outline",
     target: "_blank"
-  }, "\u2192 RT-MLPA Analysis")), _react.default.createElement("label", {
+  }, "\u2192 RT-MLPA Analysis", " ", _react.default.createElement("img", {
+    src: "http://92.222.23.215/RTMLPA/site_media/logoA.png",
+    style: {
+      height: 16,
+      marginLeft: 5
+    }
+  }))), _react.default.createElement("label", {
     htmlFor: "withDSA"
   }, _react.default.createElement("input", {
     type: "checkbox",
@@ -33309,7 +33315,7 @@ var ClassifierInputs = function ClassifierInputs() {
   }), _react.default.createElement("footer", null, "TRAIN")));
 };
 
-exports.ClassifierInputs = ClassifierInputs;
+exports.Classifier = Classifier;
 },{"react":"../node_modules/react/index.js","~/utils":"utils/index.ts","./DSAInput":"components/classifier/DSAInput.tsx","./GeneInput":"components/classifier/GeneInput.tsx"}],"components/layout/Footer.tsx":[function(require,module,exports) {
 "use strict";
 
@@ -33353,7 +33359,7 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header() {
-  return _react.default.createElement("hgroup", null, _react.default.createElement("h1", null, "SVC Classifier"), _react.default.createElement("h4", null, _react.default.createElement("a", {
+  return _react.default.createElement("hgroup", null, _react.default.createElement("h1", null, "\uD83E\uDDEC SVC Classifier"), _react.default.createElement("h4", null, _react.default.createElement("a", {
     href: "#"
   }, "Molecular diagnosis of kidney transplant rejection"), " \uD83D\uDD17", " "), _react.default.createElement("h3", null, "The RT-MLPA assay as a simple molecular tool for diagnosis and classification of rejection in FFPE kidney transplant biopsies."));
 };
@@ -33369,7 +33375,7 @@ exports.App = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _ClassifierInputs = require("./components/classifier/ClassifierInputs");
+var _Classifier = require("./components/classifier/Classifier");
 
 var _Footer = require("./components/layout/Footer");
 
@@ -33378,11 +33384,11 @@ var _Header = require("./components/layout/Header");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.Header, null), _react.default.createElement(_ClassifierInputs.ClassifierInputs, null), _react.default.createElement(_Footer.Footer, null));
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.Header, null), _react.default.createElement(_Classifier.Classifier, null), _react.default.createElement(_Footer.Footer, null));
 };
 
 exports.App = App;
-},{"react":"../node_modules/react/index.js","./components/classifier/ClassifierInputs":"components/classifier/ClassifierInputs.tsx","./components/layout/Footer":"components/layout/Footer.tsx","./components/layout/Header":"components/layout/Header.tsx"}],"index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/classifier/Classifier":"components/classifier/Classifier.tsx","./components/layout/Footer":"components/layout/Footer.tsx","./components/layout/Header":"components/layout/Header.tsx"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

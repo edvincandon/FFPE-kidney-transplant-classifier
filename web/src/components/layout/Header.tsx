@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Header: React.FC = () => (
   <hgroup>
-    <h1>SVC Classifier</h1>
+    <h1>🧬 SVC Classifier</h1>
     <h4>
       <a href="#">Molecular diagnosis of kidney transplant rejection</a> 🔗{" "}
     </h4>
