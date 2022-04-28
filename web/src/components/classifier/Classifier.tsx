@@ -1,9 +1,9 @@
-import React, { CSSProperties, useMemo, useState } from 'react';
+import React, { CSSProperties, useCallback, useMemo, useState } from 'react';
 import { chunks } from '~/utils';
 
 import { DSAInput } from './DSAInput';
 import { GeneInput } from './GeneInput';
-import { GENES, GeneState } from './genes';
+import { DEFAULT_GENE_STATE, GENES, GeneState } from './genes';
 import { Heatmap } from './Heatmap';
 import { scalerTransform } from './scaler';
 import { ABMR_TEST, CONTROL_TEST, TCMR_TEST } from './test.data';
@@ -12,12 +12,38 @@ const buttonStyles: CSSProperties = {
   marginBottom: 5,
   display: "inline-block",
   padding: "7px 2px",
-  fontSize: "0.8em",
+  fontSize: "0.6em",
 };
 export const Classifier: React.FC = () => {
-  const genesGrid = useMemo(() => [...chunks(GENES.slice(), 3)], []);
+  const genesGrid = useMemo(() => [...chunks(GENES.slice(), 6)], []);
   const [withDSA, setWithDSA] = useState<boolean>(true);
-  const [inputs, setInputs] = useState<GeneState>({});
+  const [inputs, setInputs] = useState<GeneState>(DEFAULT_GENE_STATE);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const predict = useCallback(async (inputs: GeneState, withDSA: boolean) => {
+    try {
+      setLoading(true);
+      await new Promise((res) => setTimeout(res, 500));
+      const { DSA, ...genes } = Object.fromEntries(
+        Object.entries(inputs).map(([key, value]) => [key, parseFloat(value)])
+      );
+      const res = await fetch("/classify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ genes, ...(withDSA ? { DSA } : {}) }),
+      });
+
+      if (!res.ok) throw new Error(await res.text());
+      const data = await res.json();
+      console.log(data);
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <>
@@ -80,21 +106,28 @@ export const Classifier: React.FC = () => {
                 style={buttonStyles}
                 onClick={() => setInputs(TCMR_TEST)}
               >
-                TCMR test
+                TCMR Sample
               </button>
               <button
                 className="outline secondary"
                 style={buttonStyles}
                 onClick={() => setInputs(ABMR_TEST)}
               >
-                ABMR test
+                ABMR Sample
               </button>
               <button
                 className="outline secondary"
                 style={buttonStyles}
                 onClick={() => setInputs(CONTROL_TEST)}
               >
-                Control test
+                Control Sample
+              </button>
+              <button
+                className="outline secondary"
+                style={buttonStyles}
+                onClick={() => setInputs(DEFAULT_GENE_STATE)}
+              >
+                Reset
               </button>
             </div>
           </div>
@@ -134,7 +167,8 @@ export const Classifier: React.FC = () => {
           <button
             role="button"
             className="primary"
-            onClick={() => console.log(inputs)}
+            disabled={loading}
+            onClick={() => predict(inputs, withDSA)}
           >
             → PREDICT
           </button>
