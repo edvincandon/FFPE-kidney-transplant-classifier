@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from flask_expects_json import expects_json
 
-from classifier import Classifier
+from _classifier import Classifier
 
 app = Flask(__name__)
 
