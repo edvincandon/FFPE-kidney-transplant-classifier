@@ -44,7 +44,7 @@ class Classifier:
                                    'ADAMDEC1',
                                    'IFNG']
                       },
-            'dsa': {'type': 'number', 'optional': True}
+            'DSA': {'type': 'number', 'optional': True}
         },
         'required': ['genes']
     }
@@ -52,7 +52,7 @@ class Classifier:
     def __init__(self, app, data):
         self.app = app
         self.data = data
-        self.withDSA = 'dsa' in self.data
+        self.withDSA = 'DSA' in self.data
         self.loadModel()
 
     def loadModel(self):
@@ -68,7 +68,7 @@ class Classifier:
     def predict(self):
         rawInput = list(self.data["genes"].values())
         if (self.withDSA):
-            rawInput = [self.data['dsa']] + rawInput
+            rawInput = [self.data['DSA']] + rawInput
 
         input = self.scaler.transform([rawInput])
         prediction = self.classifier.predict(input)
