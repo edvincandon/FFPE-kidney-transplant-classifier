@@ -91,14 +91,14 @@ export const Classifier: React.FC = () => {
           </blockquote>
 
           <a
-            href=" http://92.222.23.215/RTMLPA/index.php?p=signin"
+            href="http://92.222.23.215/RTMLPA/index.php?p=signin"
             role="button"
             className="secondary outline"
             target="_blank"
           >
             → RT-MLPA Analysis{" "}
             <img
-              src="http://92.222.23.215/RTMLPA/site_media/logoA.png"
+              src="/static/images/logo-tool.png"
               style={{ height: 16, marginLeft: 5 }}
             />
           </a>
