@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Footer: React.FC = () => (
   <footer>
-    <p>
+    <div>
       <h4>Paper authorship</h4>
       <p>
         Tristan de Nattes<sup>1,2,3</sup>, Jack Beadle<sup>3</sup>, Frederic
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => (
         </li>
         <li>Pathology Department, Rouen University Hospital - Rouen 🇫🇷</li>
       </ol>
-    </p>
+    </div>
     <p>
       <strong>For research purposes only</strong>
     </p>

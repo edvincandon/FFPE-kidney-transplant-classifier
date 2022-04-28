@@ -1,33 +1,23 @@
-import React, { useMemo, useState } from 'react';
+import React, { CSSProperties, useMemo, useState } from 'react';
 import { chunks } from '~/utils';
 
 import { DSAInput } from './DSAInput';
 import { GeneInput } from './GeneInput';
+import { GENES, GeneState } from './genes';
+import { Heatmap } from './Heatmap';
+import { scalerTransform } from './scaler';
+import { ABMR_TEST, CONTROL_TEST, TCMR_TEST } from './test.data';
 
-const GENES = [
-  "DSA",
-  "CARD16",
-  "CD72",
-  "CD68",
-  "CCL4",
-  "CTLA4",
-  "PLA1A",
-  "ROBO4",
-  "KLRD1",
-  "FCGR3",
-  "GNLY",
-  "CXCL11",
-  "CCL18",
-  "CAV1",
-  "PECAM",
-  "PRF1",
-  "ADAMDEC1",
-  "IFNG",
-];
-
+const buttonStyles: CSSProperties = {
+  marginBottom: 5,
+  display: "inline-block",
+  padding: "7px 2px",
+  fontSize: "0.8em",
+};
 export const Classifier: React.FC = () => {
-  const genesGrid = useMemo(() => [...chunks(GENES, 6)], []);
+  const genesGrid = useMemo(() => [...chunks(GENES.slice(), 3)], []);
   const [withDSA, setWithDSA] = useState<boolean>(true);
+  const [inputs, setInputs] = useState<GeneState>({});
 
   return (
     <>
@@ -70,31 +60,85 @@ export const Classifier: React.FC = () => {
             />
           </a>
         </header>
-        <label htmlFor="withDSA">
-          <input
-            type="checkbox"
-            id="withDSA"
-            name="withDSA"
-            checked={withDSA}
-            onChange={(e) => setWithDSA(e.target.checked)}
-          />
-          With Donor-Specific Antibodies (DSA) input
-        </label>
+        <div className={"grid"} style={{ alignItems: "center" }}>
+          <div>
+            <label htmlFor="withDSA">
+              <input
+                type="checkbox"
+                id="withDSA"
+                name="withDSA"
+                checked={withDSA}
+                onChange={(e) => setWithDSA(e.target.checked)}
+              />
+              With Donor-Specific Antibodies (DSA) input
+            </label>
+          </div>
+          <div>
+            <div className="grid">
+              <button
+                className="outline secondary"
+                style={buttonStyles}
+                onClick={() => setInputs(TCMR_TEST)}
+              >
+                TCMR test
+              </button>
+              <button
+                className="outline secondary"
+                style={buttonStyles}
+                onClick={() => setInputs(ABMR_TEST)}
+              >
+                ABMR test
+              </button>
+              <button
+                className="outline secondary"
+                style={buttonStyles}
+                onClick={() => setInputs(CONTROL_TEST)}
+              >
+                Control test
+              </button>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr />
         <br />
         {genesGrid.map((geneRow, i) => (
           <div className="grid" key={i}>
             {geneRow.map((gene) => (
               <div key={gene}>
                 {gene === "DSA" ? (
-                  <DSAInput label={gene} disabled={!withDSA} />
+                  <DSAInput
+                    label={gene}
+                    disabled={!withDSA}
+                    value={inputs[gene] ?? "1"}
+                    onChange={(value) =>
+                      setInputs((x) => ({ ...x, [gene]: value }))
+                    }
+                  />
                 ) : (
-                  <GeneInput label={gene} />
+                  <GeneInput
+                    label={gene}
+                    value={inputs[gene] ?? "0"}
+                    onChange={(value) =>
+                      setInputs((x) => ({ ...x, [gene]: value }))
+                    }
+                  />
                 )}
               </div>
             ))}
           </div>
         ))}
-        <footer>TRAIN</footer>
+        <Heatmap inputs={scalerTransform(inputs)} />
+        <footer>
+          {" "}
+          <button
+            role="button"
+            className="primary"
+            onClick={() => console.log(inputs)}
+          >
+            → PREDICT
+          </button>
+        </footer>
       </article>
     </>
   );

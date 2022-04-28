@@ -2,7 +2,9 @@ import React from 'react';
 
 export const GeneInput: React.FC<{
   label: string;
-}> = ({ label }) => {
+  value?: string;
+  onChange: (value: string) => any;
+}> = ({ label, value, onChange }) => {
   return (
     <>
       <label htmlFor={label}>{label}</label>
@@ -12,8 +14,9 @@ export const GeneInput: React.FC<{
         name={label}
         min="0"
         step="0.01"
-        defaultValue={0}
         required
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </>
   );
