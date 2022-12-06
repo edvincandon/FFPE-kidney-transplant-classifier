@@ -1,5 +1,8 @@
 {
   "name": "kidney-transplant-classifier-web-app",
+  "repository": {
+    "url": "https://github.com/edvincandon/FFPE-kidney-transplant-classifier.git"
+  },
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
